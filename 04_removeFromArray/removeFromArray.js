@@ -1,33 +1,11 @@
-const removeFromArray = function(...args) {
-    let argsArray = args;
-    
-    let mainArray = argsArray.filter(extractArray)[0];
-    let remainingArg = argsArray.filter(extractNonArray);
+const removeFromArray = function (arr, ...args) {
 
-    let result = mainArray.filter(removeNonArray);
-
-
-    function extractArray(value){
-        return Array.isArray(value);
-    }
-
-    function extractNonArray(value){
-            if(Array.isArray(value)){
-                return false;
-            }
-        return true;
-    }
-
-    function removeNonArray(value){
-        if(remainingArg.includes(value)){
-            return false;
+    args.forEach((element) => {
+        if(arr.includes(element)) {
+            arr.splice(arr.indexOf(element), 1);
         }
-        return true
-    }
-
-    return result;
-
-};
-    
+    });
+      return arr;
+}; 
 // Do not edit below this line
 module.exports = removeFromArray;

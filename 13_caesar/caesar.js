@@ -7,40 +7,20 @@ const caesar = function(str, num) {
         let oldCharCode = e.codePointAt(0);
         let newCharCode = oldCharCode + num;
 
-        // if(oldCharCode >= 65 && oldCharCode <= 90){ 
-        if(e.match(/[A-Z]/)){
+        if(e.match(/[a-z]/i)){
+            let offset = (e.match(/[a-z]/)) ? 97 : 65;
 
-            newCharCode = betweenMinMax(65, 90, newCharCode);
+            newCharCode = ((newCharCode - offset) % 26 + 26) % 26 + offset;
 
-        // }else if(oldCharCode >= 97 && oldCharCode <= 122){ 
-        }else if(e.match(/[a-z]/)){
-            
-            newCharCode = betweenMinMax(97, 122, newCharCode);
-
-        }else{ // /[A-Za-z]^/
+        }else{
             newCharCode = oldCharCode;
         }
-
         return String.fromCharCode(newCharCode)
     }
     )));
 
     return result.join("");
 };
-
-function betweenMinMax(min, max, charCode){
-
-    while(charCode < min || charCode > max){
-        if(charCode < min){
-            charCode += 26; 
-        
-        }else{
-            charCode -= 26; 
-        }
-    }
-   return charCode;
-}
-
 
 // Do not edit below this line
 module.exports = caesar;
